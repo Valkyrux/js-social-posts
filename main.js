@@ -48,5 +48,22 @@ function printObjectsOnHTML(objectArray, positionOnDOM) {
 }
 // prelevo la posizione dal DOM
 const container = document.getElementById("container");
-
+// lancio la funzione con l'array dei post da inserire nel container preso in precedenza
 printObjectsOnHTML(arrayPosts, container);
+// aggiungo l'add event listener ai button like stampati in precedenza
+for (let i = 0; i < arrayPosts.length; i++) {
+    const aLikeButton = document.querySelectorAll(".js-like-button")[i];
+    const aLikeCounter = document.querySelectorAll(".js-likes-counter")[i];
+    aLikeButton.addEventListener("click",
+        function () {
+            if(!(aLikeButton.classList.contains("like-button--liked"))) {
+                arrayPosts[i].likecounter += 1;
+                aLikeButton.classList.add("like-button--liked");
+            } else {
+                arrayPosts[i].likecounter -= 1;
+                aLikeButton.classList.remove("like-button--liked");
+            }
+            aLikeCounter.innerHTML = arrayPosts[i].likecounter;
+        }
+    )
+}
