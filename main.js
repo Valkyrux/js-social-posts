@@ -7,6 +7,22 @@ const arrayPosts = [
         text: "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         image: 171,
         likecounter: 80
+    },
+    {
+        author: "Felipe Pippone",
+        profilepic: 10,
+        time: "1 mese fa",
+        text: "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
+        image: 11,
+        likecounter: 4600
+    },
+    {
+        author: "Phil Mangione",
+        profilepic: 15,
+        time: "4 mesi fa",
+        text: "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
+        image: 171,
+        likecounter: 80
     }
 ]
 // funzione che stampa i post prelevando i dati da arrayPosts
@@ -55,7 +71,9 @@ for (let i = 0; i < arrayPosts.length; i++) {
     const aLikeButton = document.querySelectorAll(".js-like-button")[i];
     const aLikeCounter = document.querySelectorAll(".js-likes-counter")[i];
     aLikeButton.addEventListener("click",
-        function () {
+        function (event) {
+            // sto prevent default mi evita la storia che ad ogni click del like mi torna ad inizio pagina
+            event.preventDefault();
             if(!(aLikeButton.classList.contains("like-button--liked"))) {
                 arrayPosts[i].likecounter += 1;
                 aLikeButton.classList.add("like-button--liked");
