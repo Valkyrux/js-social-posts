@@ -3,7 +3,7 @@ const arrayPosts = [
     {
         author: "Phil Mangione",
         profilepic: 15,
-        time: "4 mesi fa",
+        time: "08-30-2021",
         text: "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
         image: 171,
         likecounter: 80
@@ -11,29 +11,39 @@ const arrayPosts = [
     {
         author: "Felipe Pippone",
         profilepic: 10,
-        time: "1 mese fa",
-        text: "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
+        time: "08-29-2021",
+        text: "Mi domando quando mai una donna sarà disposta ad amare veramente in questa società piena di incoerenze, abbiamo perso quei valori che ci rendono speciali e umani. In un mondo impestato dalla tecnologia con cui sto scrivendo questo post IPOCRITA dove sarà finita tutta la bontà dei quarantenni pipponi che scrivono post filosofici senza senso su FB?????",
         image: 11,
         likecounter: 4600
     },
     {
-        author: "Phil Mangione",
-        profilepic: 15,
-        time: "4 mesi fa",
-        text: "Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.",
-        image: 171,
-        likecounter: 80
+        author: "Max Power",
+        time: "08-28-2021",
+        text: "ATTENZIONE AL 5G, PROVOCA TUMORI E I IL VACCINO HA DEI MICROCIP PER CONTROLLARE LE PERSONE.",
+        image: 121,
+        likecounter: 0
     }
 ]
 // funzione che stampa i post prelevando i dati da arrayPosts
 function printObjectsOnHTML(objectArray, positionOnDOM) {
     for (let i = 0; i < objectArray.length; i++) {
-        positionOnDOM.innerHTML += `
+    let profileImg = `<img class="profile-pic" src="https://unsplash.it/300/300?image=${objectArray[i].profilepic}" alt="${objectArray[i].author}">`
+    if(typeof(objectArray[i].profilepic) == "undefined") {
+        let lastNameLetter = "";
+        for (let j = 0; j < objectArray[i].author.length; j++) {
+            if(objectArray[i].author[j] == " ") {
+                lastNameLetter = objectArray[i].author[j + 1]
+            }
+        }
+        
+        profileImg = `<div class="profile-pic-default"><span>${objectArray[i].author[0]} ${lastNameLetter}</span></div>`;
+    }
+    positionOnDOM.innerHTML += `
         <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
                 <div class="post-meta__icon">
-                    <img class="profile-pic" src="https://unsplash.it/300/300?image=${objectArray[i].profilepic}" alt="Phil Mangione">                    
+                   ${profileImg}                     
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${objectArray[i].author}</div>
@@ -41,7 +51,7 @@ function printObjectsOnHTML(objectArray, positionOnDOM) {
                 </div>                    
             </div>
         </div>
-        <div class="post__text">Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.</div>
+        <div class="post__text">${objectArray[i].text}</div>
         <div class="post__image">
             <img src="https://unsplash.it/600/300?image=${objectArray[i].image}" alt="">
         </div>
