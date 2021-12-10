@@ -27,18 +27,31 @@ const arrayPosts = [
 // funzione che stampa i post prelevando i dati da arrayPosts
 function printObjectsOnHTML(objectArray, positionOnDOM) {
     for (let i = 0; i < objectArray.length; i++) {
-    let profileImg = `<img class="profile-pic" src="https://unsplash.it/300/300?image=${objectArray[i].profilepic}" alt="${objectArray[i].author}">`
-    if(typeof(objectArray[i].profilepic) == "undefined") {
-        let lastNameLetter = "";
-        for (let j = 0; j < objectArray[i].author.length; j++) {
-            if(objectArray[i].author[j] == " ") {
-                lastNameLetter = objectArray[i].author[j + 1]
+        let profileImg = `<img class="profile-pic" src="https://unsplash.it/300/300?image=${objectArray[i].profilepic}" alt="${objectArray[i].author}">`
+        if(typeof(objectArray[i].profilepic) == "undefined") {
+            let lastNameLetter = "";
+            for (let j = 0; j < objectArray[i].author.length; j++) {
+                if(objectArray[i].author[j] == " ") {
+                    lastNameLetter = objectArray[i].author[j + 1]
+                }
+            }
+            
+            profileImg = `<div class="profile-pic-default"><span>${objectArray[i].author[0]} ${lastNameLetter}</span></div>`;
+        }
+        let italianDate = "";
+        for (let j = 0; j < objectArray[i].time.length; j ++){
+            if (j == 2 || j == 5) {
+                italianDate += "/"
+            } else if (j == 0 || j == 1) {
+                italianDate += objectArray[i].time[j + 3]; 
+            } else if (j == 3 || j == 4) {
+                italianDate += objectArray[i].time[j - 3];
+            } else {
+                italianDate += objectArray[i].time[j];
             }
         }
-        
-        profileImg = `<div class="profile-pic-default"><span>${objectArray[i].author[0]} ${lastNameLetter}</span></div>`;
-    }
-    positionOnDOM.innerHTML += `
+
+        positionOnDOM.innerHTML += `
         <div class="post">
         <div class="post__header">
             <div class="post-meta">                    
@@ -47,7 +60,7 @@ function printObjectsOnHTML(objectArray, positionOnDOM) {
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${objectArray[i].author}</div>
-                    <div class="post-meta__time">${objectArray[i].time}</div>
+                    <div class="post-meta__time">${italianDate}</div>
                 </div>                    
             </div>
         </div>
